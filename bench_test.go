@@ -8,28 +8,36 @@ import (
 	"github.com/hamba/timex/mono"
 )
 
-func BenchmarkMonoNow(b *testing.B) {
+func BenchmarkTimexMonoNow(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		_ = mono.Now()
-	}
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = mono.Now()
+		}
+	})
 }
 
-func BenchmarkMonoSince(b *testing.B) {
+func BenchmarkTimexMonoSince(b *testing.B) {
 	start := mono.Now()
 
 	b.ReportAllocs()
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_ = mono.Since(start)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = mono.Since(start)
+		}
+	})
 }
 
 func BenchmarkTimexNow(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		_ = timex.Now()
-	}
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = timex.Now()
+		}
+	})
 }
 
 func BenchmarkTimexSince(b *testing.B) {
@@ -37,31 +45,51 @@ func BenchmarkTimexSince(b *testing.B) {
 
 	b.ReportAllocs()
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_ = timex.Since(start)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = timex.Since(start)
+		}
+	})
 }
 
 func BenchmarkTimexUnix(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		_ = timex.Unix()
-	}
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = timex.Unix()
+		}
+	})
 }
 
-func BenchmarkWallTimeNow(b *testing.B) {
+func BenchmarkTimeNow(b *testing.B) {
 	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		_ = time.Now().UnixNano()
-	}
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = time.Now().UnixNano()
+		}
+	})
 }
 
-func BenchmarkWallTimeSince(b *testing.B) {
+func BenchmarkTimeSince(b *testing.B) {
 	start := time.Now()
 
 	b.ReportAllocs()
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		_ = time.Since(start)
-	}
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = time.Since(start)
+		}
+	})
+}
+
+func BenchmarkTimeUnix(b *testing.B) {
+	b.ReportAllocs()
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_ = time.Now().Unix()
+		}
+	})
 }
