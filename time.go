@@ -3,7 +3,8 @@ package timex
 
 import (
 	"time"
-	_ "unsafe" // Required in order to import walltime
+	// Required in order to import walltime.
+	_ "unsafe"
 )
 
 //go:linkname walltime runtime.walltime
