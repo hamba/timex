@@ -1,5 +1,5 @@
-//go:build !go1.17 || !(linux && amd64)
-// +build !go1.17 !linux !amd64
+//go:build !go1.17
+// +build !go1.17
 
 package timex
 

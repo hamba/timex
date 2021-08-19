@@ -1,11 +1,11 @@
-//go:build go1.17 && linux && amd64
-// +build go1.17,linux,amd64
+//go:build go1.17
+// +build go1.17
 
 package timex
 
 import _ "unsafe" // for go:linkname
 
-//go:linkname now runtime.time_now
+//go:linkname now time.now
 func now() (int64, int32, int64)
 
 // Now returns the current time in nanoseconds.
